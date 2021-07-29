@@ -38,10 +38,10 @@ class CreateProductsTable extends Migration
             $table->string('long_descp_en')->nullable();
             $table->string('long_descp_bn')->nullable();
             $table->string('product_thambnail');
-            $table->boolean('hot_deals')->default(false);
-            $table->boolean('featured')->default(false);
-            $table->boolean('special_offer')->default(false);
-            $table->boolean('special_deals')->default(false);
+            $table->string('hot_deals')->default(false);
+            $table->string('featured')->default(false);
+            $table->string('special_offer')->default(false);
+            $table->string('special_deals')->default(false);
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

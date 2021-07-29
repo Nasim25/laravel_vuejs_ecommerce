@@ -39,10 +39,10 @@ class Category extends Model
             $strpos = strpos($request->category_image,';');
             $sub = substr($request->category_image,0,$strpos);
             $name_gen = hexdec(uniqid()).'_'.time().'.'.explode('/',$sub)[1];
-            Image::make($category_image)->resize(870,370)->save('public/upload/category/'.$name_gen);
-            $save_category_img = 'public/upload/category/'.$name_gen;
+            Image::make($category_image)->resize(870,370)->save('upload/category/'.$name_gen);
+            $save_category_img = 'upload/category/'.$name_gen;
         }else{
-            $save_category_img = 'public/upload/category_default.png';
+            $save_category_img = 'upload/category_default.png';
         }
 
 

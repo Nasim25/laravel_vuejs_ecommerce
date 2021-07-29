@@ -29,8 +29,8 @@ class Slider extends Model
             $strpos = strpos($request->slider_img,';');
             $sub = substr($request->slider_img,0,$strpos);
             $name_gen = hexdec(uniqid()).'_'.time().'.'.explode('/',$sub)[1];
-            Image::make($slider_img)->resize(870,370)->save('public/upload/slider/'.$name_gen);
-            $save_slider_img = 'public/upload/slider/'.$name_gen;
+            Image::make($slider_img)->resize(870,370)->save('upload/slider/'.$name_gen);
+            $save_slider_img = 'upload/slider/'.$name_gen;
         }else{
             $save_slider_img = 'public/upload/slider_default.png';
         }

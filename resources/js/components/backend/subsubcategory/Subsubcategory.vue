@@ -59,7 +59,7 @@
                                     <div class="form-group">
                                         <label>Select Category</label>
                                         <select class="form-control"  v-model="form.category_id" :class="{'b-danger': form.errors.has('category_id')}">
-                                            <option v-for="category in getCategories" :value="category.id" @click="categoryBySubcategory(category.id)" >{{ category.category_name_en }} - {{ category.category_name_bn }}</option>
+                                            <option v-for="category in getCategories" :value="category.id" :key="category.id" >{{ category.category_name_en }} - {{ category.category_name_bn }}</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -122,17 +122,20 @@ export default {
         }
 
     },
+    watch:{
+        'form.category_id': function(value){
+            axios.get('api/v1/subcategory/getById/'+value)
+            .then((res)=>{
+                this.subcategories =  res.data.data;
+            })
+        }
+    },
     methods:{
         formReset(){
             this.form.reset();
             this.editMode = false;
         },
-        categoryBySubcategory(id){
-            axios.get('api/v1/subcategory/getById/'+id)
-            .then((res)=>{
-                this.subcategories =  res.data.data;
-            })
-        },
+        
         addSubsubCategory(){
             this.form.post('api/v1/subsubcategory/store')
                 .then(()=>{

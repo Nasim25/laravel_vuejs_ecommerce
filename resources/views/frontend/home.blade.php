@@ -14,7 +14,7 @@
         content="BAITS,TZLBD,NEDUBD">
     <title>baits</title>
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
     <link rel="icon" href="{{asset('frontend/')}}/images/favicon.png">
     <link rel="stylesheet" href="{{asset('frontend/')}}/fonts/flaticon/flaticon.css">
     <link rel="stylesheet" href="{{asset('frontend/')}}/fonts/icofont/icofont.min.css">
@@ -26,12 +26,13 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="forntendContent">
 
         <frontend-main></frontend-main>
 
     </div>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <script src="{{ asset('js/app_frontend.js') }}" defer></script>
     <script src="{{ asset('js/frontend.js') }}" defer></script>
     
 </body>

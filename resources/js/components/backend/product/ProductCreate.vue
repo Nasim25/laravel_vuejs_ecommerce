@@ -19,7 +19,7 @@
                             <div class="form-group">
                                 <label for="inputMaxLength" class="control-label">Category Select <span class="text-danger">*</span></label>
                                 <select class="form-control" v-model="form.category_id" :class="{'b-danger': form.errors.has('category_id')}" >
-                                    <option v-for="category in getCategory" :value="category.id" :key="category.id" @click="categoryBySubcategory(category.id)">{{ category.category_name_en }}</option>
+                                    <option v-for="category in getCategory" :value="category.id" :key="category.id">{{ category.category_name_en }}</option>
                                 </select>
                             </div>
                         </div>
@@ -28,7 +28,7 @@
                             <div class="form-group">
                                 <label for="inputMaxLength" class="control-label">SubCategory Select <span class="text-danger">*</span></label>
                                 <select class="form-control" v-model="form.subcategory_id" :class="{'b-danger': form.errors.has('subcategory_id')}">
-                                    <option v-for="subcategory in subcategories" :value="subcategory.id" :key="subcategory.id" @click="subcategoryBySusubbcategory(subcategory.id)">{{ subcategory.subcategory_name_en }}</option>
+                                    <option v-for="subcategory in subcategories" :value="subcategory.id" :key="subcategory.id">{{ subcategory.subcategory_name_en }}</option>
                                 </select>
                             </div>
                         </div>
@@ -263,6 +263,20 @@ export default {
         }
     },
 
+    watch:{
+        'form.category_id':function(value){
+            axios.get('api/v1/subcategory/getById/'+value)
+            .then((res)=>{
+                this.subcategories =  res.data.data;
+            })
+        },
+        'form.subcategory_id':function(value){
+            axios.get('api/v1/subsubcategory/getByid/'+value)
+            .then((res)=>{
+                this.subsubcategories =  res.data.data;
+            })
+        },
+    },
     mounted(){
         this.$store.dispatch("getBrands");
         this.$store.dispatch("getCategories");
@@ -282,18 +296,8 @@ export default {
         // },
     },
     methods:{
-       categoryBySubcategory(id){
-            axios.get('api/v1/subcategory/getById/'+id)
-            .then((res)=>{
-                this.subcategories =  res.data.data;
-            })
-        },
-        subcategoryBySusubbcategory(id){
-            axios.get('api/v1/subsubcategory/getByid/'+id)
-            .then((res)=>{
-                this.subsubcategories =  res.data.data;
-            })
-        },
+       
+        
         singleImage(event){
                 let file = event.target.files[0];
                  if(file.size>1048576){

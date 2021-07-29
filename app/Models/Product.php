@@ -44,8 +44,8 @@ class Product extends Model
             $strpos = strpos($request->product_thambnail,';');
             $sub = substr($request->product_thambnail,0,$strpos);
             $name_gen = hexdec(uniqid()).'_'.time().'.'.explode('/',$sub)[1];
-            Image::make($product_thambnail)->resize(917,1000)->save('public/upload/product/thambnail/'.$name_gen);
-            $save_product_thambnil = 'public/upload/product/thambnail/'.$name_gen;
+            Image::make($product_thambnail)->resize(917,1000)->save('upload/product/thambnail/'.$name_gen);
+            $save_product_thambnil = 'upload/product/thambnail/'.$name_gen;
         }else{
             $save_product_thambnil = 'public/upload/noimage.jpg';
         }
@@ -85,8 +85,8 @@ class Product extends Model
 
             foreach($imgs as $img){
                 $make_name = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
-                Image::make($img)->resize(580,480)->save('public/upload/product/multiimage/'.$make_name);
-                $multi_image_upload_path = 'public/upload/product/multiimage/'.$make_name;
+                Image::make($img)->resize(580,480)->save('upload/product/multiimage/'.$make_name);
+                $multi_image_upload_path = 'upload/product/multiimage/'.$make_name;
                 MultiImg::insert([
                     'product_id' => $product->id,
                     'image' => $multi_image_upload_path
